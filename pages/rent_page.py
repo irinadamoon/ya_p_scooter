@@ -14,8 +14,9 @@ from locators.check_status_locators import CheckStatusLocators
 class RentPage:
 
     # конструктор класса
-    def __init__(self, driver):
+    def __init__(self, driver, data_base):
         self.driver = driver
+        self.data_base = data_base
 
 
     # действия c элементами
@@ -56,8 +57,8 @@ class RentPage:
         self.driver.find_element(*RentPageLocators.CHECKBOX_GREY_COLOR_RENT_FORM).click()
 
     @allure.step("Ввeдeние текста в поле 'комментарий курьеру'")
-    def input_comment(self):
-        self.driver.find_element(*RentPageLocators.INPUT_COMMENT_RENT_FORM).send_keys('Стучите громче, сплю крепко')
+    def input_comment(self, comment):
+        self.driver.find_element(*RentPageLocators.INPUT_COMMENT_RENT_FORM).send_keys(comment)
 
     @allure.step("Клик по кнопке 'Заказать'")
     def click_order_button(self):
@@ -77,11 +78,11 @@ class RentPage:
 
     @allure.step("Ожидание загрузки всплывающего окна")
     def wait_order_status(self):
-        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located((RentPageLocators.POP_UP_INFO_ORDER_CONFIRMED_WINDOW)))
-        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable((RentPageLocators.BUTTON_CHECK_STATUS_POPUP_INFO_WINDOW)))
+        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located((RentPageLocators.POP_UP_INFO_ORDER_CONFIRMED_WINDOW)))
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((RentPageLocators.BUTTON_CHECK_STATUS_POPUP_INFO_WINDOW)))
 
     @allure.step("Оформление заказа на серый самокат с доставкой в этом месяце, сроком аренды 1 день и пустым полем 'комментарий'")
-    def order_grey_scooter_using_footer_order_button(self):
+    def order_grey_scooter_using_header_order_button(self, data):
         self.choose_delivery_date_this_month()
         self.choose_rent_period_1day()
         self.choose_grey_color()
@@ -89,22 +90,22 @@ class RentPage:
         self.click_yes_button_confirm_window()
 
     @allure.step("Оформление заказа на черный самокат с доставкой в след.месяце, сроком аренды 7 дней и всеми заполненными полями")
-    def order_black_scooter_using_footer_order_button(self):
+    def order_black_scooter_using_footer_order_button(self, data):
         self.choose_delivery_date_next_month()
         self.choose_rent_period_7days()
         self.choose_black_color()
-        self.input_comment()
+        self.input_comment(data.get('comment'))
         self.click_order_button()
         self.click_yes_button_confirm_window()
 
     @allure.step("Переход на страницу статуса заказа")
     def go_to_check_status_page(self):
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((RentPageLocators.BUTTON_CHECK_STATUS_POPUP_INFO_WINDOW)))
+        WebDriverWait(self.driver, 30).until(expected_conditions.element_to_be_clickable((RentPageLocators.BUTTON_CHECK_STATUS_POPUP_INFO_WINDOW)))
         self.driver.find_element(*RentPageLocators.BUTTON_CHECK_STATUS_POPUP_INFO_WINDOW).click()
-        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located((CheckStatusLocators.DATA_FIELD)))
+        WebDriverWait(self.driver, 30).until(expected_conditions.visibility_of_element_located((CheckStatusLocators.DATA_FIELD)))
         elem = self.driver.find_element(*CheckStatusLocators.BUTTON_CANCEL_ORDER_STATUS_PAGE)
         self.driver.execute_script("arguments[0].scrollIntoView();", elem)
-        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable((CheckStatusLocators.BUTTON_CANCEL_ORDER_STATUS_PAGE)))
+        WebDriverWait(self.driver, 30).until(expected_conditions.element_to_be_clickable((CheckStatusLocators.BUTTON_CANCEL_ORDER_STATUS_PAGE)))
 
 
 
