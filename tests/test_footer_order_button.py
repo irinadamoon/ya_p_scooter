@@ -52,7 +52,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_user_name(data_base)
 
 
@@ -70,7 +70,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_user_family_name(data_base)
 
 
@@ -88,7 +88,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_user_address(data_base)
 
 #   (есть баги)
@@ -107,7 +107,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_metro_station(data_base)
 
 
@@ -125,7 +125,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_phone_number(data_base)
 
 #   (есть баги)
@@ -144,7 +144,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_delivery_date_next_month(data_base)
 
 
@@ -162,7 +162,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_duration_7days(data_base)
 
 
@@ -180,7 +180,7 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
+        
         assert check_status.check_black_color(data_base)
 
 
@@ -198,6 +198,5 @@ class TestRegisterFooterButton:
         rent_page.order_black_scooter_using_footer_order_button(data_base)
         rent_page.wait_order_status()
         rent_page.go_to_check_status_page()
-        time.sleep(10)
-
+       
         assert check_status.check_comment(data_base)
